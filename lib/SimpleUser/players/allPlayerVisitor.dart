@@ -25,7 +25,7 @@ class _AllPlayersVisitorsState extends State<AllPlayersVisitors> {
         shadowColor: Colors.blue,
       ),
       body: StreamBuilder(
-          stream: colRef.snapshots(),
+          stream: colRef.orderBy("Average",descending: true).snapshots(),
           builder: (_,snap){
             if(snap.data!=null && snap.data!.docs.isNotEmpty){
               return ListView.builder(
@@ -43,6 +43,17 @@ class _AllPlayersVisitorsState extends State<AllPlayersVisitors> {
                             backgroundColor: Colors.black,
                             backgroundImage: NetworkImage(snap.data!.docs[index].get("Image Url")),
                           ),
+                          trailing: index<3?Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/top.jpg"),
+                              )
+                            ),
+                          ):Container( height: 40,
+                            width: 40,),
                           title: Text(snap.data!.docs[index].get("Player Name")),
                           subtitle: Text("${snap.data!.docs[index].get("Phone Number")}\n tap for more..."),
                         ),

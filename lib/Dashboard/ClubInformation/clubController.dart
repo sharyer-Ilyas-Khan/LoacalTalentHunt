@@ -10,15 +10,14 @@ class ClubData extends ChangeNotifier{
   String type="";
   String name="";
   void assignData(data){
-
-    phone=data.get("Phone Number");
-    area=data.get("Area");
-    address=data.get("Address");
-    name=data.get("Club Name");
-    pass=data.get("Password");
-    email=data.get("Email");
-    type=data.get("Type");
-    image=data.get("ImageUrl");
+    // phone=data.get("Phone Number");
+    // area=data.get("Area");
+    // address=data.get("Address");
+    // name=data.get("Club Name");
+    // pass=data.get("Password");
+    // email=data.get("Email");
+    // type=data.get("Type");
+    // image=data.get("ImageUrl");
   }
 
 }
