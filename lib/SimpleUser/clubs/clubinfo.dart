@@ -7,7 +7,8 @@ import 'package:video_player/video_player.dart';
 import '../players/playerInfo.dart';
 class ClubInfo extends StatefulWidget {
   final clubId;
-  const ClubInfo({Key? key,this.clubId}) : super(key: key);
+  final VideoUrl;
+  const ClubInfo({Key? key,this.clubId,this.VideoUrl}) : super(key: key);
 
   @override
   State<ClubInfo> createState() => _ClubInfoState();
@@ -23,7 +24,7 @@ class _ClubInfoState extends State<ClubInfo> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+        widget.VideoUrl,
         )
       ..initialize(
       ).then((_) {

@@ -21,13 +21,6 @@ class _AllTournamentsState extends State<AllTournaments> {
     height=MediaQuery.of(context).size.height;
     width=MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text("Tournaments"
-        ),
-        elevation: 20,
-        shadowColor: Colors.blue,
-      ),
       body: StreamBuilder(
           stream: colRef.snapshots(),
           builder: (_,snap){

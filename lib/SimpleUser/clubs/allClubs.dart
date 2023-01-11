@@ -18,13 +18,7 @@ class _AllClubsState extends State<AllClubs> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text("Clubs"
-        ),
-        elevation: 20,
-        shadowColor: Colors.blue,
-      ),
+
       body: StreamBuilder(
           stream: colRef.snapshots(),
           builder: (_,snap){
@@ -34,7 +28,7 @@ class _AllClubsState extends State<AllClubs> {
                   itemBuilder: (_,index){
                     return InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>ClubInfo(clubId:snap.data!.docs[index].id)));
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>ClubInfo(clubId:snap.data!.docs[index].id,VideoUrl:snap.data!.docs[index].get("VideoUrl"))));
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),

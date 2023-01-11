@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:playerprofile/Dashboard/PlayerInformation/displayProfile.dart';
 import 'package:playerprofile/Dashboard/PlayerInformation/playerController.dart';
+import 'package:playerprofile/videoPlayer.dart';
 import 'package:provider/provider.dart';
 
 class PlayerPersonalInformation extends StatefulWidget {
@@ -54,27 +58,41 @@ class _PlayerPersonalInformationState extends State<PlayerPersonalInformation> {
                child:  DisplayPlayerInfoData(data:widget.data),
              ),
            ),
-          edit?Center(
-            child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.red)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              edit?Center(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red)
+                  ),
+                  onPressed: (){
+                  setState(() {
+                    edit=false;
+                  });
+                  },
+                  child:const  Text("Cancel"),
+                ),
+              ):Center(
+                child: ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      edit=true;
+                    });
+                  },
+                  child:const  Text("  Edit  "),
+                ),
               ),
-              onPressed: (){
-              setState(() {
-                edit=false;
-              });
-              },
-              child:const  Text("Cancel"),
-            ),
-          ):Center(
-            child: ElevatedButton(
-              onPressed: (){
-                setState(() {
-                  edit=true;
-                });
-              },
-              child:const  Text("  Edit  "),
-            ),
+              SizedBox(width: 10,),
+              Center(
+                child: ElevatedButton(
+                  onPressed: (){
+                   gallery();
+                  },
+                  child:const  Text("Add Video"),
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: height*0.8,
@@ -296,4 +314,17 @@ class _PlayerPersonalInformationState extends State<PlayerPersonalInformation> {
     await FirebaseFirestore.instance.collection("Players").doc(widget.data.id).delete().whenComplete(() {
       Navigator.pop(context); Navigator.pop(context);});
   }
+  Future gallery()async{
+    var vido= await ImagePicker.platform.pickVideo(source: ImageSource.gallery);
+    if(vido!=null){
+      setState(() {
+        video=File(vido.path);
+      });
+      Navigator.push(context,MaterialPageRoute(builder: (_)=>VideoPlayersForUpload(
+        file: video,id: widget.data.id,)));
+
+    }
+    }
+
+  File? video;
 }

@@ -22,7 +22,7 @@ class _PlayerInfoState extends State<PlayerInfo> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      widget.data!.get("VideoUrl"),
     )
       ..initialize(
       ).then((_) {

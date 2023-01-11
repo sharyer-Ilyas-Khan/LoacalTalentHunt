@@ -21,6 +21,11 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
   bool edit=false;
   double height=0.0;
   double width=0.0;
+  String? batsmen="Batsmen";
+  String? bowler="Bowler";
+  String? keeper="Keeper";
+  String? allRounder="All Rounder";
+  String? group="Batsmen";
   final _formKey =GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -88,6 +93,56 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                   ),),
               ),
               // Text("Name :"),
+              ///Radio buttons
+              Row(
+                children: [
+                  Radio<String>(
+                      value:batsmen!,
+                      groupValue:group,
+                      onChanged: (val){
+                        setState(() {
+                          print(val);
+                          group=val;
+                        });
+                      }),
+                  Text("Batsmen"),
+                  Radio<String>(
+                      value:bowler!,
+                      groupValue:group,
+                      onChanged: (val){
+                        setState(() {
+                          group=val;
+                        });
+
+                      }),
+                  Text("Bowler"),
+                ],
+              ),
+              Row(
+                children: [
+                  Radio<String>(
+                      value:keeper!,
+                      groupValue:group,
+                      onChanged: (val){
+                        setState(() {
+                          print(val);
+                          group=val;
+                        });
+                      }),
+                  Text("Keeper"),
+                  Radio<String>(
+                      value:allRounder!,
+                      groupValue:group,
+                      onChanged: (val){
+                        setState(() {
+                          group=val;
+                        });
+
+                      }),
+                  Text("All Rounder"),
+                ],
+              ),
+              //name
               SizedBox(
                 height: height*0.1,
 
@@ -104,6 +159,7 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('Name')),
               ),
+              //phone
               SizedBox(
                 height: height*0.1,
 
@@ -125,7 +181,7 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('Phone')),
               ),
-
+              //age
               SizedBox(
                 height: height*0.1,
 
@@ -145,6 +201,8 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('Age')),
               ),
+              //best for 3 types
+              group=="Batsmen"?
               SizedBox(
                 height: height*0.1,
 
@@ -161,8 +219,109 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     onChanged: (val){
                       best=val;},
                     style: const TextStyle(fontSize: 12),//password field
-                    decoration:deco('Best')),
-              ),
+                    decoration:deco('Best Score')),
+              ):
+              group=="Bowler"?
+              SizedBox(
+                height: height*0.1,
+
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      best=val;},
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Best Wickets')),
+              ):
+              group=="Keeper"?
+              SizedBox(
+                height: height*0.1,
+
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      best=val;},
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Best Stumps')),
+              ):Container(),
+              ///for all rounder
+              group=="All Rounder"?
+              SizedBox(
+                height: height*0.1,
+
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      bestScore=val;},
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Best Score')),
+              ):Container(),
+              group=="All Rounder"?
+              SizedBox(
+                height: height*0.1,
+
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      bestWickets=val;},
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Best Wickets')),
+              ):Container(),
+              group=="All Rounder"?
+              SizedBox(
+                height: height*0.1,
+
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      bestStumps=val;},
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Best Stumps')),
+              ):Container(),
+
+
+
+
+              //runs
               SizedBox(
                 height: height*0.1,
                 child: TextFormField(
@@ -180,6 +339,43 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('Runs')),
               ),
+             //total wickets
+              group=="Bowler"?SizedBox(
+                height: height*0.1,
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      totalWickets=val;},
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Total Wickets')),
+              ):Container(),
+              //total stumps
+              group=="Keeper"?SizedBox(
+                height: height*0.1,
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      totalStumps=val;},
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Total Stumps')),
+              ):Container(),
+              //50s
               SizedBox(
                 height: height*0.1,
                 child: TextFormField(
@@ -198,6 +394,7 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('50s')),
               ),
+              //100s
               SizedBox(
                 height: height*0.1,
                 child: TextFormField(
@@ -216,6 +413,8 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('100s')),
               ),
+              //avg
+              group=="Batsmen"?
               SizedBox(
                 height: height*0.1,
                 child: TextFormField(
@@ -230,10 +429,109 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     ]),
                     onChanged: (val){
                       average=val;
-                      },
+                    },
                     style: const TextStyle(fontSize: 12),//password field
-                    decoration:deco('Average')),
-              ),
+                    decoration:deco('Average Score')),
+              ):
+              group=="Bowler"?
+              SizedBox(
+                height: height*0.1,
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      average=val;
+                    },
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Average Wickets')),
+              ):
+              group=="Keeper"?
+              SizedBox(
+                height: height*0.1,
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      average=val;
+                    },
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Average Stumps')),
+              ):Container(),
+              ///for all rounder
+              group=="All Rounder"?
+              SizedBox(
+                height: height*0.1,
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      averageScore=val;
+                    },
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Average Score')),
+              ):Container(),
+              group=="All Rounder"?
+              SizedBox(
+                height: height*0.1,
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      averageWickets=val;
+                    },
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Average Wickets')),
+              ):Container(),
+              group=="All Rounder"?
+              SizedBox(
+                height: height*0.1,
+                child: TextFormField(
+                    autovalidateMode:AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "Required"),
+                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
+                    ]),
+                    onChanged: (val){
+                      averageStumps=val;
+                    },
+                    style: const TextStyle(fontSize: 12),//password field
+                    decoration:deco('Average Stumps')),
+              ):Container(),
+
+
+              //matches
               SizedBox(
                 height: height*0.1,
 
@@ -321,22 +619,91 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
     var imageRef= FirebaseStorage.instance.ref(ref);
     var task=await imageRef.putFile(image!);
     var imageUrl=await task.ref.getDownloadURL();
-   await FirebaseFirestore.instance.collection("Players").add({
-      "Image Url":imageUrl,
-      "Club Id":widget.clubId,
-      "Player Name":name,
-      "Phone Number":phone,
-      "Age":age,
-      "Matches":matches,
-      "century":century,
-      "fifty":fifty,
-      "Best":best,
-      "Runs":runs,
-      "Average":average,
+    if(group=="All Rounder"){
+      await FirebaseFirestore.instance.collection("Players").add({
+        "Image Url":imageUrl,
+        "Club Id":widget.clubId,
+        "Player Name":name,
+        "Phone Number":phone,
+        "Age":age,
+        "Matches":matches,
+        "Type":group,
+        "century":century,
+        "fifty":fifty,
+        "Best Score":bestScore,
+        "Best Wickets":bestWickets,
+        "Best Stumps":bestStumps,
+        "Runs":runs,
+        "VideoUrl":"",
+        "Average Score":averageScore,
+        "Average Wickets":averageWickets,
+        "Average Stumps":averageStumps,
 
 
-    }).whenComplete(() => Navigator.pop(context));
-  }
+      })
+          .whenComplete(() => Navigator.pop(context));
+
+    }else if(group=="Bowler") {
+      await FirebaseFirestore.instance.collection("Players").add({
+        "Image Url":imageUrl,
+        "Club Id":widget.clubId,
+        "Player Name":name,
+        "Phone Number":phone,
+        "Age":age,
+        "Matches":matches,
+        "Type":group,
+        "century":century,
+        "fifty":fifty,
+        "Best":best,
+        "Runs":runs,
+        "VideoUrl":"",
+        "Total Wickets":totalWickets,
+        "Average":average,
+
+
+      }).whenComplete(() => Navigator.pop(context));
+
+    }else if(group=="Keeper") {
+      await FirebaseFirestore.instance.collection("Players").add({
+        "Image Url":imageUrl,
+        "Club Id":widget.clubId,
+        "Player Name":name,
+        "Phone Number":phone,
+        "Age":age,
+        "Matches":matches,
+        "Type":group,
+        "century":century,
+        "fifty":fifty,
+        "VideoUrl":"",
+        "Best":best,
+        "Runs":runs,
+        "Average":average,
+        "Total Stumps":totalStumps,
+
+
+      }).whenComplete(() => Navigator.pop(context));
+
+    }else{
+      await FirebaseFirestore.instance.collection("Players").add({
+        "Image Url":imageUrl,
+        "Club Id":widget.clubId,
+        "Player Name":name,
+        "Phone Number":phone,
+        "Age":age,
+        "Matches":matches,
+        "VideoUrl":"",
+        "Type":group,
+        "century":century,
+        "fifty":fifty,
+        "Best":best,
+        "Runs":runs,
+        "Average":average,
+
+
+      }).whenComplete(() => Navigator.pop(context));
+
+    }
+   }
   String name="";
   String phone="";
   String age="";
@@ -344,7 +711,16 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
   String century="";
   String fifty="";
   String best="";
+  String bestScore="";
+  String bestWickets="";
+  String bestStumps="";
+
   String runs="";
+  String totalWickets="";
+  String totalStumps="";
   String average="";
+  String averageScore="";
+  String averageWickets="";
+  String averageStumps="";
   bool load=false;
 }

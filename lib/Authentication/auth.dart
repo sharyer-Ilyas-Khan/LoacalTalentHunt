@@ -79,6 +79,7 @@ class AuthanticateUser{
         'Club Name': name,
           'Email': email,
           'ImageUrl': imgurl,
+          'VideoUrl': "",
           'Password': password,
           'Phone Number': phone,
           'Type':type,

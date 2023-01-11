@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:playerprofile/Dashboard/ClubInformation/clubController.dart';
 import 'package:provider/provider.dart';
 
+import '../../videoPlayer.dart';
 import 'displayInfo.dart';
 
 
@@ -39,27 +43,41 @@ class _ClubsHomeState extends State<ClubsHome> {
               child:  DisplayClubInfoData(),
             ),
           ),
-          edit?Center(
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.red)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              edit?Center(
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.red)
+                  ),
+                  onPressed: (){
+                    setState(() {
+                      edit=false;
+                    });
+                  },
+                  child:const  Text("Cancel"),
+                ),
+              ):Center(
+                child: ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      edit=true;
+                    });
+                  },
+                  child:const  Text("  Edit  "),
+                ),
               ),
-              onPressed: (){
-                setState(() {
-                  edit=false;
-                });
-              },
-              child:const  Text("Cancel"),
-            ),
-          ):Center(
-            child: ElevatedButton(
-              onPressed: (){
-                setState(() {
-                  edit=true;
-                });
-              },
-              child:const  Text("  Edit  "),
-            ),
+              SizedBox(width: 10,),
+              Center(
+                child: ElevatedButton(
+                  onPressed: (){
+                    gallery();
+                  },
+                  child:const  Text("Add Video"),
+                ),
+              ),
+            ],
           ),
           Expanded(
               flex:2,
@@ -208,4 +226,19 @@ class _ClubsHomeState extends State<ClubsHome> {
   String? phone;
   String? address;
   String? area;
+  Future gallery()async{
+    var vido= await ImagePicker.platform.pickVideo(source: ImageSource.gallery);
+    if(vido!=null){
+      setState(() {
+        video=File(vido.path);
+      });
+      Navigator.push(context,MaterialPageRoute(builder: (_)=>VideoPlayersForUpload(
+        file: video,id: widget.clubId,
+        type:"club"
+      )));
+
+    }
+  }
+
+  File? video;
 }
