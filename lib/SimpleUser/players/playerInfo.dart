@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../Dashboard/PlayerInformation/displayProfile.dart';
+import '../../videoPlayerFor Media.dart';
 
 
 class PlayerInfo extends StatefulWidget {
@@ -139,7 +140,17 @@ class _PlayerInfoState extends State<PlayerInfo> {
                          },
                          icon: Icon( _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,color: Colors.white,size: 40,),
                        ),
-                     )
+                     ),
+                     Positioned(
+                         bottom:0,
+                         right: 0,
+                         child: IconButton(
+                           onPressed:(){
+                             Navigator.push(context, MaterialPageRoute(builder: (_)=>VideoPlayersForMedia(url: widget.data!.get("VideoUrl") ,)));
+
+                           },
+                           icon: Icon(Icons.fullscreen,color: Colors.white,size: 30,),
+                         )),
                    ],
                  ),
                ),

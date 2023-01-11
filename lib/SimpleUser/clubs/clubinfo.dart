@@ -2,8 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:playerprofile/SimpleUser/clubs/displayInfo.dart';
+import 'package:playerprofile/videoPlayerFor%20Media.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../videoPlayer.dart';
 import '../players/playerInfo.dart';
 class ClubInfo extends StatefulWidget {
   final clubId;
@@ -119,6 +121,7 @@ class _ClubInfoState extends State<ClubInfo> {
                   color: Colors.black,
                   child: Stack(
                     children: [
+
                       VideoPlayer(_controller),
                       Center(
                         child: IconButton(
@@ -131,7 +134,17 @@ class _ClubInfoState extends State<ClubInfo> {
                           },
                           icon: Icon( _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,color: Colors.white,size: 40,),
                         ),
-                      )
+                      ),
+                      Positioned(
+                          bottom:0,
+                          right: 0,
+                          child: IconButton(
+                            onPressed:(){
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=>VideoPlayersForMedia(url: widget.VideoUrl ,)));
+
+                            },
+                            icon: Icon(Icons.fullscreen,color: Colors.white,size: 30,),
+                          )),
                     ],
                   ),
                 ),

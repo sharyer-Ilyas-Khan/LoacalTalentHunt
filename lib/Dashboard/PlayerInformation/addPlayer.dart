@@ -240,25 +240,6 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('Best Wickets')),
               ):
-              group=="Keeper"?
-              SizedBox(
-                height: height*0.1,
-
-                child: TextFormField(
-                    autovalidateMode:AutovalidateMode.onUserInteraction,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    validator: MultiValidator([
-                      RequiredValidator(errorText: "Required"),
-                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
-                    ]),
-                    onChanged: (val){
-                      best=val;},
-                    style: const TextStyle(fontSize: 12),//password field
-                    decoration:deco('Best Stumps')),
-              ):Container(),
               ///for all rounder
               group=="All Rounder"?
               SizedBox(
@@ -298,26 +279,6 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('Best Wickets')),
               ):Container(),
-              group=="All Rounder"?
-              SizedBox(
-                height: height*0.1,
-
-                child: TextFormField(
-                    autovalidateMode:AutovalidateMode.onUserInteraction,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    validator: MultiValidator([
-                      RequiredValidator(errorText: "Required"),
-                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
-                    ]),
-                    onChanged: (val){
-                      bestStumps=val;},
-                    style: const TextStyle(fontSize: 12),//password field
-                    decoration:deco('Best Stumps')),
-              ):Container(),
-
 
 
 
@@ -510,26 +471,6 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
                     style: const TextStyle(fontSize: 12),//password field
                     decoration:deco('Average Wickets')),
               ):Container(),
-              group=="All Rounder"?
-              SizedBox(
-                height: height*0.1,
-                child: TextFormField(
-                    autovalidateMode:AutovalidateMode.onUserInteraction,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    validator: MultiValidator([
-                      RequiredValidator(errorText: "Required"),
-                      PatternValidator( ("[0-9)]"),errorText: 'Only INTEGERS')
-                    ]),
-                    onChanged: (val){
-                      averageStumps=val;
-                    },
-                    style: const TextStyle(fontSize: 12),//password field
-                    decoration:deco('Average Stumps')),
-              ):Container(),
-
 
               //matches
               SizedBox(
@@ -632,12 +573,10 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
         "fifty":fifty,
         "Best Score":bestScore,
         "Best Wickets":bestWickets,
-        "Best Stumps":bestStumps,
         "Runs":runs,
         "VideoUrl":"",
         "Average Score":averageScore,
         "Average Wickets":averageWickets,
-        "Average Stumps":averageStumps,
 
 
       })
@@ -713,7 +652,6 @@ class _AddNewPlayerState extends State<AddNewPlayer> {
   String best="";
   String bestScore="";
   String bestWickets="";
-  String bestStumps="";
 
   String runs="";
   String totalWickets="";

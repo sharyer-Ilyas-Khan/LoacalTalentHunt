@@ -34,6 +34,7 @@ class DisplayPlayerInfoData extends StatelessWidget {
                     Text("AGE:", style: styles(Colors.black, 12.0,),),
                     Text("Matches:", style: styles(Colors.black, 12.0,),),
                     Text("100/50s:", style: styles(Colors.black, 12.0,),),
+                    Text("Type:", style: styles(Colors.black, 12.0,),),
                   ],
                 ),
                 Column(
@@ -43,6 +44,7 @@ class DisplayPlayerInfoData extends StatelessWidget {
                     Text(data!.get("Age"), style: styles(Colors.blue, 12.0,),),
                     Text(data!.get("Matches"), style: styles(Colors.blue, 12.0,),),
                     Text("${data!.get("century")}/${data!.get("fifty")}", style: styles(Colors.blue, 12.0,),),
+                    Text("${data!.get("Type")}", style: styles(Colors.blue, 12.0,),),
                   ],
                 ),
                 const SizedBox(width: 10,),
